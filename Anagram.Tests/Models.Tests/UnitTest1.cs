@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using Anagram;
+using System;
 
 namespace Anagram.Tests
 {
@@ -29,11 +30,34 @@ namespace Anagram.Tests
         public void CompileList_WillCompileList_StringList()
         {
             AnagramProgram TestAnagram = new AnagramProgram();
-            List<string> testList = new List<string>(new string[] { "a", "b", "c" });
-            string word = "a b c";
+            List<string> testList = new List<string>(new string[] { "bob", "gary", "mike" });
+            string word = "bob gary mike";
             string[] inputList = word.Split(' ');
-            TestAnagram.CompileList(inputList);
-            CollectionAssert.AreEqual(testList, TestAnagram.GetListOfWords());
+            CollectionAssert.AreEqual(testList, TestAnagram.GetInputForList(word));
         }
+
+        [TestMethod]
+        public void SplitList_WillSplitandSort_StringList()
+        {
+            AnagramProgram TestAnagram = new AnagramProgram();
+            string name = "apple";
+            char[] testString = {'a','e','l','p','p'};
+            CollectionAssert.AreEqual(testString, TestAnagram.SplitWordList(name));
+        }
+
+        [TestMethod]
+        public void CompareSortedWords_WillReturnBool_CompareWords()
+        {
+            AnagramProgram TestAnagram = new AnagramProgram();
+            string testword = "save";
+            string testword2 = "vase";
+            char[] testString = { 'a', 'e', 's', 'v'};
+            TestAnagram.GetWordOne(testString);
+            char[] testChar = TestAnagram.SplitWordList(testword);
+            char[] testChar2 = TestAnagram.SplitWordList(testword2);
+            CollectionAssert.AreEqual(true, TestAnagram.CompareWords(testChar2));
+        }
+    
+    
     }
 }
