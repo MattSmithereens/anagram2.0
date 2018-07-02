@@ -9,10 +9,14 @@ namespace Anagram.Models
 
     public class AnagramProgram
     {
-        //private List<string> _listOfWords = new List<string>() { };
+     
 
         private string _word1;
         private string _word2;
+        private string[] _wordArray;
+        private string _match;
+
+        //public static List<string> MatchesList = new List<string>();
 
         public void SetWord1(string word)
         {
@@ -34,43 +38,60 @@ namespace Anagram.Models
             return _word2;
         }
 
-        //public void SetListOfWords(string word)
-        //{
-        //    _listOfWords.Add(word);
-        //}
-
-        //public List<string> GetListOfWords()
-        //{
-        //    return _listOfWords;
-        //}
-
-        //public void StartGame()
-        //{
-        //    Console.WriteLine("Enter a word:");
-        //    SetWordOne(Console.ReadLine());
-
-        //    Console.WriteLine("Enter a list of words to see if they match:");
-        //    GetInputForList();
-        //}
-
-        //public void GetInputForList()
-        //{
-        //    string[] inputList = Console.ReadLine().Split(' ');
-        //    CompileList(inputList);
-        //}
-
-        //public void CompileList(string[] listOfWords)
-        //{
-            //foreach (string word in listOfWords)
-            //{
-            //    SetListOfWords(word);
-            //}
-
-
-
-            //foreach (string word in GetListOfWords())
-            //{
-            //    Console.WriteLine(word);
-            //}
+        public void  SetWordArray(string[] words)
+        {
+            _wordArray = words;
         }
+
+        public string[] GetWordArray()
+        {
+            return _wordArray;
+        }
+
+        public void SetMatch(string match)
+        {
+            _match = match;
+        }
+
+        public string GetMatch()
+        {
+            return _match;
+        }
+
+        public string[] SplitString(string words)
+        {
+            string[] listArray = words.Split();
+            SetWordArray(listArray);
+            return GetWordArray();
+
+        }
+
+        public char[] SortString(string toSort)
+        {
+            char[] charToSort = toSort.ToCharArray();
+            Array.Sort(charToSort);
+            return charToSort;
+        }
+
+       
+
+        public List<string> Compare(string[] wordArray)
+        {
+            List<string> MatchesList = new List<string>();
+
+            string input = "save";
+            foreach (string word in wordArray)
+              
+            {
+                if (SortString(word) == SortString(input))
+                    MatchesList.Add(word);
+            }
+            Console.WriteLine(MatchesList);
+            return MatchesList;
+                
+        }
+
+
+
     }
+}
